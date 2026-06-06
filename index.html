@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#000000" />
+    <title>rple</title>
+    <link rel="icon" type="image/png" href="assets/IH8ZgF8f.png%3Fv=20260605-logo" />
+    <link rel="alternate icon" type="image/png" href="assets/IH8ZgF8f.png" />
+    <link rel="apple-touch-icon" href="assets/IH8ZgF8f.png" />
+    <style>
+      .boot-splash {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        isolation: isolate;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 50% 0%, rgba(255,255,255,0.14), transparent 32%),
+          radial-gradient(circle at 12% 14%, rgba(255,255,255,0.08), transparent 28%),
+          radial-gradient(circle at 88% 84%, rgba(255,255,255,0.07), transparent 30%),
+          linear-gradient(135deg, #050505, #101010 48%, #000);
+        color: #fff;
+        font-family: Inter, system-ui, sans-serif;
+        transition: opacity 620ms cubic-bezier(0.16, 1, 0.3, 1), visibility 620ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .boot-splash::before,
+      .boot-splash::after {
+        content: '';
+        position: absolute;
+        pointer-events: none;
+      }
+
+      .boot-splash::before {
+        inset: 0;
+        z-index: 0;
+        opacity: 0.14;
+        background-image: linear-gradient(rgba(255,255,255,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 1px);
+        background-size: 42px 42px;
+        mask-image: radial-gradient(circle at center, #000 0 44%, transparent 76%);
+        animation: boot-grid 12s linear infinite;
+      }
+
+      .boot-splash::after {
+        left: 50%;
+        top: 50%;
+        z-index: 0;
+        width: min(72vw, 680px);
+        aspect-ratio: 1;
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 999px;
+        background: radial-gradient(circle, transparent 58%, rgba(255,255,255,0.045));
+        box-shadow: inset 0 0 90px rgba(255,255,255,0.025), 0 0 90px rgba(255,255,255,0.025);
+        transform: translate(-50%, -50%);
+        animation: boot-ring 8s linear infinite;
+      }
+
+      .boot-splash.is-hidden {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .boot-splash.is-completing::before {
+        animation: boot-grid-out 820ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      .boot-splash.is-completing::after {
+        animation: boot-ring-out 820ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      .boot-card {
+        --boot-progress: 8%;
+
+        position: relative;
+        z-index: 1;
+        isolation: isolate;
+        overflow: hidden;
+        width: min(360px, calc(100vw - 40px));
+        display: grid;
+        justify-items: center;
+        gap: 14px;
+        padding: 28px;
+        border: 1px solid rgba(255,255,255,0.10);
+        border-radius: 28px;
+        background:
+          radial-gradient(circle at 18% 0%, rgba(255,255,255,0.13), transparent 34%),
+          linear-gradient(180deg, rgba(22,22,22,0.88), rgba(5,5,5,0.96));
+        box-shadow: 0 34px 90px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.10);
+        text-align: center;
+        will-change: transform, opacity;
+        transition:
+          transform 720ms cubic-bezier(0.16, 1, 0.3, 1),
+          opacity 420ms cubic-bezier(0.16, 1, 0.3, 1),
+          border-color 360ms cubic-bezier(0.16, 1, 0.3, 1),
+          border-radius 360ms cubic-bezier(0.16, 1, 0.3, 1),
+          background 420ms cubic-bezier(0.16, 1, 0.3, 1),
+          box-shadow 520ms cubic-bezier(0.16, 1, 0.3, 1);
+        animation: boot-card-in 620ms cubic-bezier(0.16, 1, 0.3, 1) both;
+      }
+
+      .boot-splash.is-completing .boot-card {
+        animation: boot-card-out 760ms cubic-bezier(0.45, 0, 0.2, 1) forwards;
+      }
+
+      .boot-card::before,
+      .boot-card::after {
+        content: '';
+        position: absolute;
+        pointer-events: none;
+      }
+
+      .boot-card::before {
+        inset: 10px;
+        z-index: 0;
+        border-radius: 22px;
+        background:
+          linear-gradient(90deg, rgba(255,255,255,0.36) 0 28px, transparent 28px calc(100% - 28px), rgba(255,255,255,0.36) calc(100% - 28px)) top / 100% 1px no-repeat,
+          linear-gradient(90deg, rgba(255,255,255,0.36) 0 28px, transparent 28px calc(100% - 28px), rgba(255,255,255,0.36) calc(100% - 28px)) bottom / 100% 1px no-repeat,
+          linear-gradient(rgba(255,255,255,0.36) 0 28px, transparent 28px calc(100% - 28px), rgba(255,255,255,0.36) calc(100% - 28px)) left / 1px 100% no-repeat,
+          linear-gradient(rgba(255,255,255,0.36) 0 28px, transparent 28px calc(100% - 28px), rgba(255,255,255,0.36) calc(100% - 28px)) right / 1px 100% no-repeat;
+        opacity: 0.16;
+      }
+
+      .boot-card::after {
+        inset: -18% -42%;
+        z-index: 0;
+        background: linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.10) 46%, transparent 70%);
+        transform: translate3d(-72%, 0, 0) skewX(-16deg);
+        animation: boot-sweep 2.8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+      }
+
+      .boot-card > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .boot-card img {
+        width: 64px;
+        height: 64px;
+        overflow: hidden;
+        object-fit: cover;
+        border-radius: 18px;
+        background: rgba(255,255,255,0.045);
+        box-shadow: 0 14px 34px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.14);
+        filter: drop-shadow(0 0 28px rgba(255,255,255,0.18));
+        transition:
+          transform 420ms cubic-bezier(0.16, 1, 0.3, 1),
+          border-radius 320ms cubic-bezier(0.16, 1, 0.3, 1),
+          box-shadow 420ms cubic-bezier(0.16, 1, 0.3, 1),
+          filter 420ms cubic-bezier(0.16, 1, 0.3, 1),
+          opacity 260ms cubic-bezier(0.16, 1, 0.3, 1);
+        animation: boot-logo 2.8s ease-in-out infinite;
+      }
+
+      .boot-card strong {
+        font-size: 28px;
+        line-height: 1;
+        letter-spacing: -0.06em;
+      }
+
+      .boot-card small {
+        color: rgba(255,255,255,0.52);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 10px;
+        line-height: 1.25;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .boot-card span {
+        position: relative;
+        width: 100%;
+        height: 6px;
+        overflow: hidden;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.065);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.055);
+      }
+
+      .boot-card span::before {
+        content: '';
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: var(--boot-progress);
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, rgba(255,255,255,0.54), #fff, rgba(255,255,255,0.74));
+        box-shadow: 0 0 24px rgba(255,255,255,0.30);
+        transition: width 360ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .boot-card span::after {
+        content: '';
+        position: absolute;
+        inset: 0 auto 0 -45%;
+        width: 42%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, transparent, rgba(0,0,0,0.28), transparent);
+        animation: boot-run 1.4s ease-in-out infinite;
+      }
+
+      @keyframes boot-card-in {
+        0% { opacity: 0; transform: translate3d(0, 20px, 0) scale(0.94); }
+        62% { opacity: 1; transform: translate3d(0, -2px, 0) scale(1.006); }
+        100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+      }
+
+      @keyframes boot-grid {
+        from { background-position: 0 0; }
+        to { background-position: 84px 84px; }
+      }
+
+      @keyframes boot-ring {
+        from { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+        50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.035); }
+        to { transform: translate(-50%, -50%) rotate(360deg) scale(1); }
+      }
+
+      @keyframes boot-card-out {
+        0% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+        36% { opacity: 1; transform: translate3d(0, -4px, 0) scale(1.012); }
+        100% { opacity: 0; transform: translate3d(0, -28px, 0) scale(0.965); }
+      }
+
+      @keyframes boot-ring-out {
+        0% { opacity: 1; transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+        100% { opacity: 0; transform: translate(-50%, -50%) rotate(26deg) scale(1.18); }
+      }
+
+      @keyframes boot-grid-out {
+        0% { opacity: 0.14; transform: scale(1); }
+        100% { opacity: 0; transform: scale(1.04); }
+      }
+
+      @keyframes boot-sweep {
+        0%, 28% { transform: translate3d(-72%, 0, 0) skewX(-16deg); opacity: 0; }
+        42% { opacity: 0.76; }
+        72%, 100% { transform: translate3d(72%, 0, 0) skewX(-16deg); opacity: 0; }
+      }
+
+      @keyframes boot-logo {
+        0%, 100% { transform: translateZ(0) scale(1); }
+        50% { transform: translateZ(0) scale(1.035); }
+      }
+
+      @keyframes boot-run {
+        from { transform: translateX(-120%); opacity: 0.5; }
+        50% { opacity: 1; }
+        to { transform: translateX(250%); opacity: 0.5; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .boot-splash::before,
+        .boot-splash::after,
+        .boot-card::after,
+        .boot-card img,
+        .boot-card span::after {
+          animation: none !important;
+        }
+
+        .boot-splash {
+          transition-duration: 220ms !important;
+        }
+
+        .boot-card {
+          animation-duration: 220ms !important;
+        }
+
+        .boot-splash.is-completing .boot-card {
+          animation-duration: 260ms !important;
+        }
+      }
+    </style>
+
+    <script type="text/javascript">
+      // ── Asset & Scraping Protection ─────────────────────────────────────────
+      (function () {
+        'use strict';
+
+        // 1. Block right-click context menu on game/asset elements
+        document.addEventListener('contextmenu', function (e) {
+          const target = e.target;
+          if (
+            target.tagName === 'CANVAS' ||
+            target.tagName === 'IMG' ||
+            target.tagName === 'VIDEO' ||
+            target.closest('.game-page') ||
+            target.closest('.unity-stage') ||
+            target.closest('.map-thumb-shell')
+          ) {
+            e.preventDefault();
+            return false;
+          }
+        }, { capture: true, passive: false });
+
+        // 2. Block drag-and-drop on images/canvas (prevents easy asset saving)
+        document.addEventListener('dragstart', function (e) {
+          if (e.target.tagName === 'IMG' || e.target.tagName === 'CANVAS') {
+            e.preventDefault();
+          }
+        }, { capture: true });
+
+        // 3. Intercept fetch/XHR to block known scraping patterns
+        //    (blocks bulk sequential asset enumeration)
+        var _realFetch = window.fetch;
+        var _scrapeCount = 0;
+        var _scrapeTimer = 0;
+        window.fetch = function (url) {
+          var urlStr = String(url || '');
+          // Allow internal game assets — block external enumeration attempts
+          if (urlStr.startsWith('http') && !urlStr.includes(window.location.hostname)) {
+            // External fetch — allow but don't log
+          } else {
+            _scrapeCount++;
+            clearTimeout(_scrapeTimer);
+            _scrapeTimer = setTimeout(function () { _scrapeCount = 0; }, 2000);
+            // If more than 40 asset requests in 2s without user gesture, throttle
+            if (_scrapeCount > 40 && !document.hasFocus()) {
+              console.warn('[TRO] Rate limiting suspicious bulk fetch');
+              return new Promise(function (_, reject) {
+                setTimeout(function () { reject(new Error('Rate limited')); }, 2000);
+              });
+            }
+          }
+          return _realFetch.apply(this, arguments);
+        };
+
+        // 4. Detect web2zip / wget / curl user-agents and known scraper bots
+        var ua = navigator.userAgent || '';
+        var blockedAgents = ['web2zip', 'HTTrack', 'wget', 'curl/', 'python-requests', 'scrapy', 'archiver'];
+        for (var i = 0; i < blockedAgents.length; i++) {
+          if (ua.toLowerCase().includes(blockedAgents[i].toLowerCase())) {
+            document.documentElement.innerHTML = '<body style="background:#000;color:#fff;font-family:monospace;padding:40px">Access denied.</body></html>';
+            throw new Error('Blocked');
+          }
+        }
+
+        // 5. Block Ctrl+S / Ctrl+U (save page / view source) on game page
+        document.addEventListener('keydown', function (e) {
+          if (document.body.classList.contains('is-game-route')) {
+            if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S' || e.key === 'u' || e.key === 'U')) {
+              e.preventDefault();
+            }
+          }
+        }, { capture: true });
+
+        // 6. Canvas protection — disable toDataURL/toBlob on game canvas
+        //    (applied after Unity boots)
+        var _patchCanvas = function () {
+          var canvas = document.querySelector('.unity-stage canvas, .game-page canvas');
+          if (canvas) {
+            canvas.toDataURL = function () { return ''; };
+            canvas.toBlob = function (cb) { cb(null); };
+            canvas.captureStream = function () { return null; };
+          }
+        };
+        window.__troCanvasProtectionPatch = _patchCanvas;
+        // Run again after game loads
+        document.addEventListener('DOMContentLoaded', function () {
+          setTimeout(_patchCanvas, 8000);
+          setTimeout(_patchCanvas, 16000);
+        });
+
+        // 7. Prevent common image hotlinking detection evasion
+        Object.defineProperty(document, 'referrer', {
+          get: function () { return window.location.origin; },
+          configurable: true,
+        });
+      })();
+    </script>
+    <script type="module" crossorigin src="assets/DvKgc7W2.js"></script>
+    <link rel="stylesheet" crossorigin href="assets/BaOrZw98.css">
+  <link rel="stylesheet" href="purple.css">
+</head>
+  <body>
+    <div class="boot-splash" id="boot-splash" role="status" aria-live="polite">
+      <div class="boot-card">
+        <img src="assets/IH8ZgF8f.png" alt="" />
+        <strong id="boot-splash-title"></strong>
+        <small id="boot-splash-status"></small>
+        <span id="boot-splash-progress" role="progressbar" aria-label="Progresso inicial" aria-valuemin="0" aria-valuemax="100" aria-valuenow="8"></span>
+      </div>
+    </div>
+    <div id="root"></div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Esconder hotbar exceto configs
+  function hideHotbar() {
+    const brand = document.querySelector('.dock-brand');
+    const tabs = document.querySelector('.dock-tabs');
+    const discord = document.querySelector('.dock-discord-button');
+    if (brand) brand.style.setProperty('display', 'none', 'important');
+    if (tabs) tabs.style.setProperty('display', 'none', 'important');
+    if (discord) discord.style.setProperty('display', 'none', 'important');
+    
+    // Footer
+    const footer = document.querySelector('.home-scroll-footer, .tro-credit');
+    if (footer) footer.textContent = 'made by jotas';
+  }
+  hideHotbar();
+  setTimeout(hideHotbar, 1000);
+  setTimeout(hideHotbar, 3000);
+  new MutationObserver(hideHotbar).observe(document.body, {childList: true, subtree: true});
+});
+</script>
+
+<script>
+new MutationObserver(() => {
+  const panel = document.querySelector('.game-loading-panel');
+  if (!panel) return;
+
+  panel.style.setProperty('background', 'linear-gradient(135deg, #0a0018, #1a0035)', 'important');
+  panel.style.setProperty('border-color', 'rgba(148,0,255,0.4)', 'important');
+  panel.style.setProperty('box-shadow', '0 0 60px rgba(148,0,255,0.3)', 'important');
+
+  const bar = document.querySelector('.loading-progress span');
+  if (bar) {
+    bar.style.setProperty('background', 'linear-gradient(90deg, #9400ff, #c084fc)', 'important');
+    bar.style.setProperty('box-shadow', '0 0 20px rgba(148,0,255,0.6)', 'important');
+  }
+
+  // Texto embaixo
+  if (!panel.querySelector('.achaz-credit')) {
+    const tag = document.createElement('div');
+    tag.className = 'achaz-credit';
+    tag.style.cssText = 'text-align:center;font-family:monospace;font-size:11px;color:#c084fc;letter-spacing:0.15em;text-transform:uppercase;margin-top:10px;font-weight:700;';
+    const mapName = document.querySelector('.game-loading-panel h2, .game-loading-panel strong')?.textContent || '';
+    tag.textContent = (mapName ? mapName + ' | ' : '') + '';
+    panel.appendChild(tag);
+  }
+}).observe(document.body, {childList: true, subtree: true});
+</script>
+
+<script>
+function fixGrid() {
+  const grid = document.querySelector('.simple-home-grid');
+  if (!grid) return;
+  grid.style.setProperty('display', 'grid', 'important');
+  grid.style.setProperty('grid-template-columns', 'repeat(3, minmax(0, 1fr))', 'important');
+  grid.style.setProperty('gap', '20px', 'important');
+}
+fixGrid();
+setTimeout(fixGrid, 500);
+setTimeout(fixGrid, 1500);
+new MutationObserver(fixGrid).observe(document.body, {childList: true, subtree: true});
+</script>
+<script>
+function fixGrid() {
+  const grid = document.querySelector('.simple-home-grid');
+  if (!grid) return;
+  grid.style.setProperty('display', 'grid', 'important');
+  grid.style.setProperty('grid-template-columns', 'repeat(2, minmax(0, 1fr))', 'important');
+  grid.style.setProperty('gap', '14px', 'important');
+  grid.style.setProperty('padding', '0 8px', 'important');
+  
+  document.querySelectorAll('.platform-card-title h2').forEach(el => {
+    el.style.setProperty('font-size', '18px', 'important');
+    el.style.setProperty('white-space', 'nowrap', 'important');
+    el.style.setProperty('overflow', 'hidden', 'important');
+    el.style.setProperty('text-overflow', 'ellipsis', 'important');
+  });
+}
+fixGrid();
+setTimeout(fixGrid, 500);
+setTimeout(fixGrid, 1500);
+new MutationObserver(fixGrid).observe(document.body, {childList: true, subtree: true});
+</script>
+<script>
+function fixGrid() {
+  const grid = document.querySelector('.simple-home-grid');
+  if (!grid) return;
+  grid.style.setProperty('display', 'grid', 'important');
+  grid.style.setProperty('grid-template-columns', 'repeat(2, minmax(0, 1fr))', 'important');
+  grid.style.setProperty('gap', '14px', 'important');
+  grid.style.setProperty('padding', '0 8px', 'important');
+  
+  document.querySelectorAll('.platform-card-title h2').forEach(el => {
+    el.style.setProperty('font-size', '18px', 'important');
+    el.style.setProperty('white-space', 'nowrap', 'important');
+    el.style.setProperty('overflow', 'hidden', 'important');
+    el.style.setProperty('text-overflow', 'ellipsis', 'important');
+  });
+}
+fixGrid();
+setTimeout(fixGrid, 500);
+setTimeout(fixGrid, 1500);
+new MutationObserver(fixGrid).observe(document.body, {childList: true, subtree: true});
+</script>
+<script>
+function fixGrid() {
+  const grid = document.querySelector('.simple-home-grid');
+  if (!grid) return;
+  grid.style.setProperty('display', 'grid', 'important');
+  grid.style.setProperty('grid-template-columns', 'repeat(2, minmax(0, 1fr))', 'important');
+  grid.style.setProperty('gap', '14px', 'important');
+  grid.style.setProperty('padding', '0 8px', 'important');
+  
+  document.querySelectorAll('.platform-card-title h2').forEach(el => {
+    el.style.setProperty('font-size', '18px', 'important');
+    el.style.setProperty('white-space', 'nowrap', 'important');
+    el.style.setProperty('overflow', 'hidden', 'important');
+    el.style.setProperty('text-overflow', 'ellipsis', 'important');
+  });
+}
+fixGrid();
+setTimeout(fixGrid, 500);
+setTimeout(fixGrid, 1500);
+new MutationObserver(fixGrid).observe(document.body, {childList: true, subtree: true});
+</script>
+<script>
+function fixAll() {
+  // Fix nomes dos mapas
+  document.querySelectorAll('.platform-card-title h2').forEach(el => {
+    el.style.setProperty('font-size', '14px', 'important');
+    el.style.setProperty('white-space', 'nowrap', 'important');
+    el.style.setProperty('overflow', 'hidden', 'important');
+    el.style.setProperty('text-overflow', 'ellipsis', 'important');
+    el.style.setProperty('width', '100%', 'important');
+  });
+
+  // Fix loading - esconder log
+  document.querySelectorAll('.loading-event-feed, .loading-steps, .app-loading-meta, .game-loading-meta').forEach(el => {
+    el.style.setProperty('display', 'none', 'important');
+  });
+}
+fixAll();
+setInterval(fixAll, 500);
+new MutationObserver(fixAll).observe(document.body, {childList: true, subtree: true});
+</script>
+<script>
+// ── Cronômetro ──────────────────────────────────────────
+let cronStart = null, cronInterval = null, cronRunning = false, cronTotal = 0;
+
+function formatCron(ms) {
+  const h = Math.floor(ms/3600000).toString().padStart(2,'0');
+  const m = Math.floor((ms%3600000)/60000).toString().padStart(2,'0');
+  const s = Math.floor((ms%60000)/1000).toString().padStart(2,'0');
+  const ms2 = Math.floor((ms%1000)/10).toString().padStart(2,'0');
+  return `${h}:${m}:${s}.${ms2}`;
+}
+
+const cronEl = document.createElement('div');
+cronEl.id = 'achaz-cron';
+cronEl.style.cssText = `
+  position:fixed;top:12px;right:12px;z-index:99999;
+  background:rgba(80,0,140,0.55);backdrop-filter:blur(8px);
+  border:1px solid rgba(192,132,252,0.4);border-radius:10px;
+  padding:6px 12px;font-family:monospace;font-size:13px;
+  color:#c084fc;font-weight:700;letter-spacing:0.08em;
+  display:none;pointer-events:none;
+`;
+cronEl.textContent = '00:00:00.00';
+document.body.appendChild(cronEl);
+
+let qPressCount = 0, qTimer = null;
+document.addEventListener('keydown', e => {
+  if (e.code !== 'KeyQ') return;
+  qPressCount++;
+  clearTimeout(qTimer);
+  qTimer = setTimeout(() => { qPressCount = 0; }, 400);
+
+  if (qPressCount === 1) {
+    // Iniciar
+    if (!cronRunning) {
+      cronRunning = true;
+      cronEl.style.display = 'block';
+      cronStart = Date.now() - cronTotal;
+      cronInterval = setInterval(() => {
+        cronTotal = Date.now() - cronStart;
+        cronEl.textContent = formatCron(cronTotal);
+      }, 10);
+    }
+  } else if (qPressCount >= 2) {
+    // Parar e resetar
+    cronRunning = false;
+    clearInterval(cronInterval);
+    cronTotal = 0;
+    cronEl.textContent = '00:00:00.00';
+    cronEl.style.display = 'none';
+    qPressCount = 0;
+  }
+});
+
+// ── Filtros de saturação/qualidade ──────────────────────
+function applyFilter(val) {
+  const canvas = document.querySelector('canvas');
+  if (canvas) canvas.style.filter = val;
+}
+
+// Injetar nas configurações
+function injectSettings() {
+  const body = document.querySelector('.settings-body');
+  if (!body || body.querySelector('#achaz-extra-settings')) return;
+
+  const sec = document.createElement('section');
+  sec.id = 'achaz-extra-settings';
+  sec.className = 'settings-section';
+  sec.innerHTML = `
+    <div class="settings-section-head">
+      <h3>Cronômetro</h3>
+      <p>Pressione <kbd>Q</kbd> para iniciar · <kbd>Q Q</kbd> para resetar</p>
+    </div>
+    <div class="settings-section-head" style="margin-top:16px">
+      <h3>Saturação / Qualidade</h3>
+      <p>Ajusta o visual do jogo em tempo real</p>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px">
+      <button class="settings-key-button" onclick="applyFilter('saturate(3) contrast(1.1)')">🔥 Saturação Forte</button>
+      <button class="settings-key-button" onclick="applyFilter('saturate(1.8) contrast(1.05)')">✨ Saturação Média</button>
+      <button class="settings-key-button" onclick="applyFilter('saturate(1.2)')">🌿 Saturação Leve</button>
+      <button class="settings-key-button" onclick="applyFilter('saturate(1) contrast(1) brightness(1)')">⚪ Normal</button>
+      <button class="settings-key-button" onclick="applyFilter('saturate(1.5) contrast(1.15) brightness(1.05) sharpen(1)')">💎 Qualidade Máxima</button>
+    </div>
+  `;
+  body.appendChild(sec);
+}
+
+window.applyFilter = applyFilter;
+setInterval(injectSettings, 1000);
+</script>
+  </body>
+</html><script>
+(function() {
+  // Força remoção do boot splash após 3s
+  function killSplash() {
+    var s = document.getElementById('boot-splash');
+    if (s) s.remove();
+  }
+  setTimeout(killSplash, 3000);
+  
+  // Força o React a chamar Is() se travar
+  var _origSetTimeout = window.setTimeout;
+  var _booted = false;
+  function forceBoots() {
+    if (_booted) return;
+    _booted = true;
+    // Tenta chamar Is diretamente
+    try { window.Is && window.Is({immediate:true}); } catch(e) {}
+    // Tenta chamar via evento
+    try { document.dispatchEvent(new Event('DOMContentLoaded')); } catch(e) {}
+    killSplash();
+  }
+  setTimeout(forceBoots, 2500);
+
+  // Monitora o #root — se o React montar algo, remove o splash
+  var observer = new MutationObserver(function(mutations) {
+    var root = document.getElementById('root');
+    if (root && root.children.length > 0) {
+      setTimeout(killSplash, 800);
+    }
+  });
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    var root = document.getElementById('root');
+    if (root) {
+      observer.observe(root, {childList: true, subtree: true});
+    }
+    // Se após 3s o root ainda tiver vazio, algo travou o React
+    setTimeout(function() {
+      var root = document.getElementById('root');
+      if (root && root.children.length === 0) {
+        // Tenta remontar o React
+        root.innerHTML = '';
+        killSplash();
+      }
+    }, 3000);
+  });
+})();
+</script>

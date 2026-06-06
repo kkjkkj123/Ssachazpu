@@ -1,0 +1,287 @@
+:root {
+  --purple: #9400ff;
+  --purple-light: #c084fc;
+  --purple-dark: #0a0018;
+}
+
+/* Fundo geral */
+html, body {
+  background: #0a0018 !important;
+}
+
+/* Todos os fundos escuros -> roxo escuro */
+[style*="background:#000"],
+[style*="background: #000"] {
+  background: #0a0018 !important;
+}
+
+/* Fundo dos cards */
+.platform-card, .simple-home-card .platform-card {
+  background: linear-gradient(180deg, #1a0030eb, #08001af5) !important;
+  border-color: rgba(148,0,255,0.3) !important;
+  box-shadow: 0 28px 78px #0a001875, 0 0 40px rgba(148,0,255,0.15), inset 0 1px rgba(192,132,252,0.2) !important;
+}
+
+/* Navbar */
+.topbar.dock-topbar {
+  background: linear-gradient(135deg, #1a003088, #08001acc) !important;
+  border-color: rgba(148,0,255,0.3) !important;
+  box-shadow: 0 0 40px rgba(148,0,255,0.25) !important;
+}
+
+/* Botão jogar */
+.platform-access-active, .btn-primary {
+  background: linear-gradient(135deg, #9400ff, #c084fc) !important;
+  color: #fff !important;
+  box-shadow: 0 0 30px rgba(148,0,255,0.5) !important;
+}
+
+/* Glows roxos no fundo */
+.app-backdrop {
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(148,0,255,0.3), transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(192,132,252,0.2), transparent 50%),
+    #0a0018 !important;
+}
+
+/* Tabs ativas */
+.dock-tab.is-active {
+  background: linear-gradient(135deg, rgba(148,0,255,0.3), rgba(148,0,255,0.1)) !important;
+  border-color: rgba(148,0,255,0.4) !important;
+}
+
+/* Ponto colorido */
+.sh-kicker-dot, .dock-dot {
+  background: #c084fc !important;
+  box-shadow: 0 0 10px #c084fc !important;
+}
+
+/* Search bar */
+.tro-search, .sh-search {
+  background: linear-gradient(145deg, #1a0030f5, #08001ae6) !important;
+  border-color: rgba(148,0,255,0.25) !important;
+}
+
+/* Overlay geral */
+.boot-splash, .save-editor-overlay {
+  background: rgba(10,0,24,0.85) !important;
+}
+
+/* Boot card */
+.boot-card {
+  background: linear-gradient(180deg, #1a0030e0, #08001af5) !important;
+  border-color: rgba(148,0,255,0.3) !important;
+}
+
+/* Grid horizontal */
+.simple-home-grid {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  overflow-y: visible !important;
+  gap: 20px !important;
+  padding-bottom: 16px !important;
+  scroll-snap-type: x mandatory !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+.simple-home-card {
+  flex: 0 0 300px !important;
+  min-width: 300px !important;
+  scroll-snap-align: start !important;
+}
+
+/* Esconder scrollbar mas manter funcional */
+.simple-home-grid::-webkit-scrollbar { display: none !important; }
+.simple-home-grid { scrollbar-width: none !important; }
+
+/* Fix cards */
+.simple-home-grid {
+  display: grid !important;
+  flex-direction: unset !important;
+  flex-wrap: unset !important;
+  overflow-x: visible !important;
+  grid-template-columns: repeat(auto-fill, minmax(min(320px,100%), 360px)) !important;
+  justify-content: center !important;
+  gap: 28px !important;
+}
+
+.simple-home-card {
+  flex: unset !important;
+  min-width: unset !important;
+  width: 100% !important;
+}
+
+/* Tirar textos abaixo dos mapas (região, descrição) mas manter badges */
+.simple-home-card .platform-card > p,
+.simple-home-card .platform-card-title small,
+.simple-home-card .available-pill {
+  display: none !important;
+}
+
+/* Mapas na vertical (grid normal) */
+.simple-home-grid {
+  display: grid !important;
+  flex-direction: unset !important;
+  overflow-x: visible !important;
+  grid-template-columns: repeat(auto-fill, minmax(min(320px,100%), 360px)) !important;
+  justify-content: center !important;
+  gap: 28px !important;
+}
+
+.simple-home-card {
+  flex: unset !important;
+  min-width: unset !important;
+  width: 100% !important;
+  scroll-snap-align: unset !important;
+}
+
+/* Efeito roxo e vermelho na transição de tela */
+.route-transition-veil {
+  background: linear-gradient(135deg, #1a0030, #300010) !important;
+}
+.route-transition-panel-a {
+  background: linear-gradient(135deg, #9400ff, #cc0033) !important;
+}
+.route-transition-panel-b {
+  background: linear-gradient(135deg, #cc0033, #9400ff) !important;
+}
+.route-transition-rail-a, .route-transition-rail-b, .route-transition-rail-c {
+  background: linear-gradient(90deg, #9400ff, #cc0033) !important;
+}
+
+/* Tela de loading roxa */
+.game-loading-overlay, .game-loading-panel {
+  background: linear-gradient(135deg, #0a0018, #1a0035) !important;
+}
+
+.game-loading-panel {
+  border-color: rgba(148,0,255,0.3) !important;
+  box-shadow: 0 0 60px rgba(148,0,255,0.3) !important;
+}
+
+/* Barra de progresso roxa */
+.loading-progress span {
+  background: linear-gradient(90deg, #9400ff, #c084fc) !important;
+  box-shadow: 0 0 20px rgba(148,0,255,0.6) !important;
+}
+
+/* Texto embaixo: Nome do mapa | achazpu */
+.game-loading-panel::after {
+  content: attr(data-map-name) " | achazpu";
+  display: block;
+  text-align: center;
+  font-family: monospace;
+  font-size: 12px;
+  font-weight: 700;
+  margin-top: 10px;
+  color: #c084fc;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Titulo tela de carregamento */
+.game-loading-title::before {
+  content: "TELA DE CARREGAMENTO";
+  display: block;
+  font-size: 10px;
+  color: #9400ff;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+/* Loading do jogo - FORÇADO */
+.game-loading-overlay {
+  background: #0a0018 !important;
+}
+.game-loading-panel,
+.unity-overlay {
+  background: linear-gradient(135deg, #0a0018 0%, #1a0035 100%) !important;
+  border: 1px solid rgba(148,0,255,0.5) !important;
+  box-shadow: 0 0 80px rgba(148,0,255,0.4), inset 0 1px rgba(192,132,252,0.2) !important;
+}
+.game-loading-overlay .loading-progress span,
+.loading-progress.is-determinate span {
+  background: linear-gradient(90deg, #9400ff, #c084fc) !important;
+  box-shadow: 0 0 20px rgba(148,0,255,0.8) !important;
+}
+.game-loading-overlay .login-orb-one {
+  background: radial-gradient(circle, #9400ff, transparent) !important;
+}
+.game-loading-overlay .login-orb-two {
+  background: radial-gradient(circle, #cc0066, transparent) !important;
+}
+
+/* Esconder tudo na tela de loading exceto a barra */
+.game-loading-panel .loading-mark,
+.game-loading-panel .loading-copy,
+.game-loading-panel .loading-skeleton,
+.game-loading-panel .loading-steps,
+.game-loading-panel .loading-event-feed,
+.game-loading-panel .app-loading-meta,
+.game-loading-panel .game-loading-meta,
+.game-loading-panel .loader,
+.game-loading-panel h2,
+.game-loading-panel p,
+.game-loading-panel strong,
+.game-loading-panel small {
+  display: none !important;
+}
+
+.game-loading-panel .loading-progress {
+  width: 80% !important;
+  margin: 40px auto !important;
+  height: 8px !important;
+  border-radius: 999px !important;
+  background: rgba(148,0,255,0.2) !important;
+}
+
+.game-loading-panel .loading-progress span {
+  background: linear-gradient(90deg, #9400ff, #c084fc) !important;
+  box-shadow: 0 0 20px rgba(148,0,255,0.8) !important;
+  border-radius: 999px !important;
+}
+
+/* Fix cards horizontais */
+.simple-home-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+  padding: 0 8px !important;
+}
+
+.simple-home-card {
+  flex: unset !important;
+  max-width: unset !important;
+  width: 100% !important;
+}
+
+.simple-home-card .platform-card-title h2 {
+  font-size: 18px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.simple-home-card .platform-card {
+  min-height: 0 !important;
+}
+
+/* Esconder log de loading */
+.game-loading-panel .loading-steps,
+.game-loading-panel .loading-event-feed,
+.game-loading-panel .app-loading-meta,
+.game-loading-panel .game-loading-meta,
+[class*="loading-step"],
+[class*="event-feed"] {
+  display: none !important;
+}
+
+/* Tirar boot card */
+.boot-card {
+  display: none !important;
+}
+.boot-splash {
+  background: #0a0018 !important;
+}
