@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#000000" />
-    <title>rple</title>
+    <title>The Real Run</title>
     <link rel="icon" type="image/png" href="assets/IH8ZgF8f.png%3Fv=20260605-logo" />
     <link rel="alternate icon" type="image/png" href="assets/IH8ZgF8f.png" />
     <link rel="apple-touch-icon" href="assets/IH8ZgF8f.png" />
@@ -275,7 +275,7 @@
       }
     </style>
 
-    <script type="text/javascript">
+    <script type="8a7a9446aaefb261a7fba77b-text/javascript">
       // ── Asset & Scraping Protection ─────────────────────────────────────────
       (function () {
         'use strict';
@@ -333,7 +333,7 @@
         var blockedAgents = ['web2zip', 'HTTrack', 'wget', 'curl/', 'python-requests', 'scrapy', 'archiver'];
         for (var i = 0; i < blockedAgents.length; i++) {
           if (ua.toLowerCase().includes(blockedAgents[i].toLowerCase())) {
-            document.documentElement.innerHTML = '<body style="background:#000;color:#fff;font-family:monospace;padding:40px">Access denied.</body></html>';
+            document.documentElement.innerHTML = '<body style="background:#000;color:#fff;font-family:monospace;padding:40px">Access denied.</body>';
             throw new Error('Blocked');
           }
         }
@@ -371,20 +371,23 @@
         });
       })();
     </script>
-    <script type="module" crossorigin src="assets/DvKgc7W2.js"></script>
+    <script type="8a7a9446aaefb261a7fba77b-module" crossorigin src="assets/DvKgc7W2.js"></script>
     <link rel="stylesheet" crossorigin href="assets/BaOrZw98.css">
+  <link rel="stylesheet" href="purple.css">
   <link rel="stylesheet" href="purple.css">
 </head>
   <body>
     <div class="boot-splash" id="boot-splash" role="status" aria-live="polite">
       <div class="boot-card">
         <img src="assets/IH8ZgF8f.png" alt="" />
-        <strong id="boot-splash-title"></strong>
-        <small id="boot-splash-status"></small>
+        <strong id="boot-splash-title">The Real Run</strong>
+        <small id="boot-splash-status">Boas-vindas ao The Real Run</small>
         <span id="boot-splash-progress" role="progressbar" aria-label="Progresso inicial" aria-valuemin="0" aria-valuemax="100" aria-valuenow="8"></span>
       </div>
     </div>
     <div id="root"></div>
+  <script src="cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="8a7a9446aaefb261a7fba77b-|49" defer></script></body>
+</html>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   // Esconder hotbar exceto configs
@@ -406,267 +409,4 @@ document.addEventListener('DOMContentLoaded', function() {
   new MutationObserver(hideHotbar).observe(document.body, {childList: true, subtree: true});
 });
 </script>
-
-<script>
-new MutationObserver(() => {
-  const panel = document.querySelector('.game-loading-panel');
-  if (!panel) return;
-
-  panel.style.setProperty('background', 'linear-gradient(135deg, #0a0018, #1a0035)', 'important');
-  panel.style.setProperty('border-color', 'rgba(148,0,255,0.4)', 'important');
-  panel.style.setProperty('box-shadow', '0 0 60px rgba(148,0,255,0.3)', 'important');
-
-  const bar = document.querySelector('.loading-progress span');
-  if (bar) {
-    bar.style.setProperty('background', 'linear-gradient(90deg, #9400ff, #c084fc)', 'important');
-    bar.style.setProperty('box-shadow', '0 0 20px rgba(148,0,255,0.6)', 'important');
-  }
-
-  // Texto embaixo
-  if (!panel.querySelector('.achaz-credit')) {
-    const tag = document.createElement('div');
-    tag.className = 'achaz-credit';
-    tag.style.cssText = 'text-align:center;font-family:monospace;font-size:11px;color:#c084fc;letter-spacing:0.15em;text-transform:uppercase;margin-top:10px;font-weight:700;';
-    const mapName = document.querySelector('.game-loading-panel h2, .game-loading-panel strong')?.textContent || '';
-    tag.textContent = (mapName ? mapName + ' | ' : '') + '';
-    panel.appendChild(tag);
-  }
-}).observe(document.body, {childList: true, subtree: true});
-</script>
-
-<script>
-function fixGrid() {
-  const grid = document.querySelector('.simple-home-grid');
-  if (!grid) return;
-  grid.style.setProperty('display', 'grid', 'important');
-  grid.style.setProperty('grid-template-columns', 'repeat(3, minmax(0, 1fr))', 'important');
-  grid.style.setProperty('gap', '20px', 'important');
-}
-fixGrid();
-setTimeout(fixGrid, 500);
-setTimeout(fixGrid, 1500);
-new MutationObserver(fixGrid).observe(document.body, {childList: true, subtree: true});
-</script>
-<script>
-function fixGrid() {
-  const grid = document.querySelector('.simple-home-grid');
-  if (!grid) return;
-  grid.style.setProperty('display', 'grid', 'important');
-  grid.style.setProperty('grid-template-columns', 'repeat(2, minmax(0, 1fr))', 'important');
-  grid.style.setProperty('gap', '14px', 'important');
-  grid.style.setProperty('padding', '0 8px', 'important');
-  
-  document.querySelectorAll('.platform-card-title h2').forEach(el => {
-    el.style.setProperty('font-size', '18px', 'important');
-    el.style.setProperty('white-space', 'nowrap', 'important');
-    el.style.setProperty('overflow', 'hidden', 'important');
-    el.style.setProperty('text-overflow', 'ellipsis', 'important');
-  });
-}
-fixGrid();
-setTimeout(fixGrid, 500);
-setTimeout(fixGrid, 1500);
-new MutationObserver(fixGrid).observe(document.body, {childList: true, subtree: true});
-</script>
-<script>
-function fixGrid() {
-  const grid = document.querySelector('.simple-home-grid');
-  if (!grid) return;
-  grid.style.setProperty('display', 'grid', 'important');
-  grid.style.setProperty('grid-template-columns', 'repeat(2, minmax(0, 1fr))', 'important');
-  grid.style.setProperty('gap', '14px', 'important');
-  grid.style.setProperty('padding', '0 8px', 'important');
-  
-  document.querySelectorAll('.platform-card-title h2').forEach(el => {
-    el.style.setProperty('font-size', '18px', 'important');
-    el.style.setProperty('white-space', 'nowrap', 'important');
-    el.style.setProperty('overflow', 'hidden', 'important');
-    el.style.setProperty('text-overflow', 'ellipsis', 'important');
-  });
-}
-fixGrid();
-setTimeout(fixGrid, 500);
-setTimeout(fixGrid, 1500);
-new MutationObserver(fixGrid).observe(document.body, {childList: true, subtree: true});
-</script>
-<script>
-function fixGrid() {
-  const grid = document.querySelector('.simple-home-grid');
-  if (!grid) return;
-  grid.style.setProperty('display', 'grid', 'important');
-  grid.style.setProperty('grid-template-columns', 'repeat(2, minmax(0, 1fr))', 'important');
-  grid.style.setProperty('gap', '14px', 'important');
-  grid.style.setProperty('padding', '0 8px', 'important');
-  
-  document.querySelectorAll('.platform-card-title h2').forEach(el => {
-    el.style.setProperty('font-size', '18px', 'important');
-    el.style.setProperty('white-space', 'nowrap', 'important');
-    el.style.setProperty('overflow', 'hidden', 'important');
-    el.style.setProperty('text-overflow', 'ellipsis', 'important');
-  });
-}
-fixGrid();
-setTimeout(fixGrid, 500);
-setTimeout(fixGrid, 1500);
-new MutationObserver(fixGrid).observe(document.body, {childList: true, subtree: true});
-</script>
-<script>
-function fixAll() {
-  // Fix nomes dos mapas
-  document.querySelectorAll('.platform-card-title h2').forEach(el => {
-    el.style.setProperty('font-size', '14px', 'important');
-    el.style.setProperty('white-space', 'nowrap', 'important');
-    el.style.setProperty('overflow', 'hidden', 'important');
-    el.style.setProperty('text-overflow', 'ellipsis', 'important');
-    el.style.setProperty('width', '100%', 'important');
-  });
-
-  // Fix loading - esconder log
-  document.querySelectorAll('.loading-event-feed, .loading-steps, .app-loading-meta, .game-loading-meta').forEach(el => {
-    el.style.setProperty('display', 'none', 'important');
-  });
-}
-fixAll();
-setInterval(fixAll, 500);
-new MutationObserver(fixAll).observe(document.body, {childList: true, subtree: true});
-</script>
-<script>
-// ── Cronômetro ──────────────────────────────────────────
-let cronStart = null, cronInterval = null, cronRunning = false, cronTotal = 0;
-
-function formatCron(ms) {
-  const h = Math.floor(ms/3600000).toString().padStart(2,'0');
-  const m = Math.floor((ms%3600000)/60000).toString().padStart(2,'0');
-  const s = Math.floor((ms%60000)/1000).toString().padStart(2,'0');
-  const ms2 = Math.floor((ms%1000)/10).toString().padStart(2,'0');
-  return `${h}:${m}:${s}.${ms2}`;
-}
-
-const cronEl = document.createElement('div');
-cronEl.id = 'achaz-cron';
-cronEl.style.cssText = `
-  position:fixed;top:12px;right:12px;z-index:99999;
-  background:rgba(80,0,140,0.55);backdrop-filter:blur(8px);
-  border:1px solid rgba(192,132,252,0.4);border-radius:10px;
-  padding:6px 12px;font-family:monospace;font-size:13px;
-  color:#c084fc;font-weight:700;letter-spacing:0.08em;
-  display:none;pointer-events:none;
-`;
-cronEl.textContent = '00:00:00.00';
-document.body.appendChild(cronEl);
-
-let qPressCount = 0, qTimer = null;
-document.addEventListener('keydown', e => {
-  if (e.code !== 'KeyQ') return;
-  qPressCount++;
-  clearTimeout(qTimer);
-  qTimer = setTimeout(() => { qPressCount = 0; }, 400);
-
-  if (qPressCount === 1) {
-    // Iniciar
-    if (!cronRunning) {
-      cronRunning = true;
-      cronEl.style.display = 'block';
-      cronStart = Date.now() - cronTotal;
-      cronInterval = setInterval(() => {
-        cronTotal = Date.now() - cronStart;
-        cronEl.textContent = formatCron(cronTotal);
-      }, 10);
-    }
-  } else if (qPressCount >= 2) {
-    // Parar e resetar
-    cronRunning = false;
-    clearInterval(cronInterval);
-    cronTotal = 0;
-    cronEl.textContent = '00:00:00.00';
-    cronEl.style.display = 'none';
-    qPressCount = 0;
-  }
-});
-
-// ── Filtros de saturação/qualidade ──────────────────────
-function applyFilter(val) {
-  const canvas = document.querySelector('canvas');
-  if (canvas) canvas.style.filter = val;
-}
-
-// Injetar nas configurações
-function injectSettings() {
-  const body = document.querySelector('.settings-body');
-  if (!body || body.querySelector('#achaz-extra-settings')) return;
-
-  const sec = document.createElement('section');
-  sec.id = 'achaz-extra-settings';
-  sec.className = 'settings-section';
-  sec.innerHTML = `
-    <div class="settings-section-head">
-      <h3>Cronômetro</h3>
-      <p>Pressione <kbd>Q</kbd> para iniciar · <kbd>Q Q</kbd> para resetar</p>
-    </div>
-    <div class="settings-section-head" style="margin-top:16px">
-      <h3>Saturação / Qualidade</h3>
-      <p>Ajusta o visual do jogo em tempo real</p>
-    </div>
-    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px">
-      <button class="settings-key-button" onclick="applyFilter('saturate(3) contrast(1.1)')">🔥 Saturação Forte</button>
-      <button class="settings-key-button" onclick="applyFilter('saturate(1.8) contrast(1.05)')">✨ Saturação Média</button>
-      <button class="settings-key-button" onclick="applyFilter('saturate(1.2)')">🌿 Saturação Leve</button>
-      <button class="settings-key-button" onclick="applyFilter('saturate(1) contrast(1) brightness(1)')">⚪ Normal</button>
-      <button class="settings-key-button" onclick="applyFilter('saturate(1.5) contrast(1.15) brightness(1.05) sharpen(1)')">💎 Qualidade Máxima</button>
-    </div>
-  `;
-  body.appendChild(sec);
-}
-
-window.applyFilter = applyFilter;
-setInterval(injectSettings, 1000);
-</script>
-  </body>
-</html><script>
-(function() {
-  // Força remoção do boot splash após 3s
-  function killSplash() {
-    var s = document.getElementById('boot-splash');
-    if (s) s.remove();
-  }
-  setTimeout(killSplash, 3000);
-  
-  // Força o React a chamar Is() se travar
-  var _origSetTimeout = window.setTimeout;
-  var _booted = false;
-  function forceBoots() {
-    if (_booted) return;
-    _booted = true;
-    // Tenta chamar Is diretamente
-    try { window.Is && window.Is({immediate:true}); } catch(e) {}
-    // Tenta chamar via evento
-    try { document.dispatchEvent(new Event('DOMContentLoaded')); } catch(e) {}
-    killSplash();
-  }
-  setTimeout(forceBoots, 2500);
-
-  // Monitora o #root — se o React montar algo, remove o splash
-  var observer = new MutationObserver(function(mutations) {
-    var root = document.getElementById('root');
-    if (root && root.children.length > 0) {
-      setTimeout(killSplash, 800);
-    }
-  });
-  
-  document.addEventListener('DOMContentLoaded', function() {
-    var root = document.getElementById('root');
-    if (root) {
-      observer.observe(root, {childList: true, subtree: true});
-    }
-    // Se após 3s o root ainda tiver vazio, algo travou o React
-    setTimeout(function() {
-      var root = document.getElementById('root');
-      if (root && root.children.length === 0) {
-        // Tenta remontar o React
-        root.innerHTML = '';
-        killSplash();
-      }
-    }, 3000);
-  });
-})();
-</script>
+</body>
